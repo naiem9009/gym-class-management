@@ -166,7 +166,7 @@ export default function Navbar() {
               {item.name}
             </Link>
           ))}
-          <Link href={pathname.includes("register") ? '/login' : '/register'}>
+          <Link href={'/register'}>
             <Button
               className={`w-full mt-4 ${
                 isScrolled
@@ -175,6 +175,18 @@ export default function Navbar() {
               } transition-colors duration-300`}
             >
               Sign Up
+            </Button>
+          </Link>
+
+          <Link href={'/login'}>
+            <Button
+              className={`w-full mt-2 ${
+                isScrolled
+                  ? 'bg-purple-600 text-white hover:bg-purple-700'
+                  : 'bg-white text-purple-600 hover:bg-purple-100'
+              } transition-colors duration-300`}
+            >
+              Login
             </Button>
           </Link>
         </div>
