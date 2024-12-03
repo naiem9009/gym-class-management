@@ -6,16 +6,13 @@ import { useEffect } from 'react'
 import { setAuth } from '@/lib/features/auth/authSlice'
 import { jwtVerify } from 'jose'
 import { clearTokenCookie } from '@/actions/cookie'
-import { CookiesProvider } from 'react-cookie';
 
 
 const secret = new TextEncoder().encode(process.env.JWT_SECRET);
 
 
 export const Providers = ({children} : {children : React.ReactNode}) => {
-  return <CookiesProvider defaultSetOptions={{ path: '/' }}>
-    <Provider store={store}>{children}</Provider>
-  </CookiesProvider>
+  return <Provider store={store}>{children}</Provider>
 }
 
 
