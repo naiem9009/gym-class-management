@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { jwtVerify } from 'jose';
 
-const secret = new TextEncoder().encode(process.env.NEXT_PUBLIC_JWT_SECRET);
+const secret = new TextEncoder().encode(process.env.JWT_SECRET);
 
 const LOGIN_PATH = '/login';
 const REGISTER_PATH = '/register';
