@@ -8,9 +8,11 @@ import { motion } from 'framer-motion'
 import { AppDispatch, RootState } from '@/lib/store'
 import { LoaderIcon } from 'lucide-react'
 import toast, { Toaster } from 'react-hot-toast'
+import { useCookies } from 'react-cookie';
 
 const Login = () => {
   const [email, setEmail] = useState('')
+  const [cookies, setCookie] = useCookies(['token']);
   const [password, setPassword] = useState('')
   const [errors, setErrors] = useState<string[] | null>(null)
   const dispatch = useDispatch<AppDispatch>()
@@ -25,6 +27,7 @@ const Login = () => {
       const loginResultAction = await dispatch(login({ email, password }))
       if (login.fulfilled.match(loginResultAction)) {
         toast.success("Login successful! Redirecting...");
+        setCookie('token', loginResultAction.payload?.token)
         setTimeout(() => router.push(`/${loginResultAction.payload?.role}`), 1000)
       } else {
         toast.error(loginResultAction.error.message|| "An error occurred while registering.");

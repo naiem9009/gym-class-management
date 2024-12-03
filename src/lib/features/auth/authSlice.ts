@@ -76,7 +76,6 @@ export const login = createAsyncThunk(
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${userState?.user?.token}`,
       },
-      credentials : "include",
       body: JSON.stringify({ email, password }),
     })
 
@@ -94,6 +93,7 @@ export const login = createAsyncThunk(
       loading: false,
       error: null,
     }))
+
     return data
   }
 )
