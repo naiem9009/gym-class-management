@@ -8,6 +8,8 @@ import { motion } from 'framer-motion'
 import { AppDispatch, RootState } from '@/lib/store'
 import { LoaderIcon } from 'lucide-react'
 import toast, { Toaster } from 'react-hot-toast'
+import { useCookies } from 'react-cookie';
+
 
 const Login = () => {
   const [email, setEmail] = useState('')
@@ -16,6 +18,7 @@ const Login = () => {
   const dispatch = useDispatch<AppDispatch>()
   const {loading: loginLoading} = useSelector((state: RootState) => state.auth)
   const router = useRouter()
+  const [cookies, setCookie] = useCookies(['token']);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -25,6 +28,8 @@ const Login = () => {
       const loginResultAction = await dispatch(login({ email, password }))
       if (login.fulfilled.match(loginResultAction)) {
         toast.success("Login successful! Redirecting...");
+        setCookie('token', loginResultAction.payload?.token)
+        console.log(cookies.token);
         
         setTimeout(() => router.push(`/${loginResultAction.payload?.role}`), 1000)
       } else {
